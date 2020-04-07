@@ -1,0 +1,74 @@
+#!/bin/python
+
+from tkinter import *
+
+
+d = {}
+
+box = Tk()
+
+f1 = Frame(box)
+f1.pack(side='top') 
+f2 = Frame(box)
+f2.pack(side='bottom')
+
+
+lab1 = Label(f1,text='Enter the Name to Search')
+lab1.pack()
+
+ent = Entry(f1)
+ent.pack()	
+
+def sbuc():
+    global n_lab
+    s=ent.get()
+    s_name=d[s]
+    n_lab=Label(box,text=s_name)
+    n_lab.pack()
+
+
+def cbuc():
+    n_lab.destroy()
+
+def abuc():
+    nw=Toplevel()
+    #Frame 1
+    fr1=LabelFrame(nw,text='Name :')
+    fr1.pack(side='top')
+    n_ent = Entry(fr1)
+    n_ent.pack()
+
+
+    #Frame 2
+    fr2=LabelFrame(nw,text='Number :')
+    fr2.pack()
+    nu_ent = Entry(fr2)
+    nu_ent.pack()
+
+    #Button (Save Contact)=
+
+    def sv():
+        n=n_ent.get()
+        nu=nu_ent.get()
+        d[n]=nu
+        print(d)
+        n_ent.delete(0,END)
+        nu_ent.delete(0,END)
+
+    s_bu = Button(nw,text='Save',command=sv)
+    s_bu.pack()
+    nw.resizable(0,0)
+
+
+sbu = Button(f2,text='Search',command=sbuc)
+sbu.pack(side='left')
+
+cbu = Button(f2,text='Clear',command=cbuc)
+cbu.pack(side='left')
+
+abu = Button(f2,text='Add Contact',command=abuc)
+abu.pack(side='left')
+
+box.resizable(0,0)
+
+box.mainloop()
